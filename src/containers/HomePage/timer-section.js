@@ -33,7 +33,7 @@ const Timer = () => {
     }
   }
 
-  if (currentState === 'playing' && duration >= 10 * 1000) {
+  if (currentState === 'playing' && duration >= 15 * 60 * 60 * 1000) {
     setCurrentState('ended')
     setDuration(0)
   }
