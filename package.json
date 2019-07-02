@@ -58,8 +58,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "electron-is-dev": "^1.0.1"
+    "electron-is-dev": "^1.0.1",
+    "moment": "^2.24.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }

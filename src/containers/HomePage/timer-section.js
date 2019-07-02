@@ -1,21 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import '../../stylesheets/timer.scss';
-import PropTypes from 'prop-types';
 
-const Timer = props => {
+const Timer = () => {
+  const [currentState, setCurrentState] = useState('stopped');
+  const [duration, setDuration] = useState(0);
+
+  const play = () => {
+    setCurrentState('playing')
+  }
+
+  const stop = () => {
+    setDuration(0)
+    setCurrentState('stopped')
+  }
+
+  const pause = () => {
+    setCurrentState('paused')
+  }
+
+  useEffect(() => {
+    var timerID = setInterval( () => tick(), 1000 );
+   
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  });
+
+  function tick() {
+    if (currentState === 'playing') { 
+      setDuration(duration + 1000)
+    }
+  }
+
+  if (currentState === 'playing' && duration >= 15 * 60 * 60 * 1000) {
+    setCurrentState('ended')
+    setDuration(0)
+  }
+
   return (
     <div className="timer__container">
-      <p>11:30</p>
+      {currentState === 'ended' && (
+        <p>TIME OVER</p>
+      )}
+      {currentState !== 'ended' && (
+        <p>{moment.utc(duration).format('mm:ss')}</p>
+      )}
       <div className="button__section">
-        <button>▶</button><button>||</button>
-        <button className="testButton">Run Tests</button>
+        {(currentState === 'stopped' || currentState === 'paused' || currentState === 'ended') && (
+          <button type="button" onClick={play}><i className="fa fa-play" /></button>
+        )}
+        {currentState === 'playing' && (
+          <button type="button" onClick={pause}><i className="fa fa-pause" /></button>
+        )}
+        {(currentState === 'paused'|| currentState === 'playing') && (
+          <button type="button" onClick={stop}><i className="fa fa-stop" /></button>
+        )}
+        <button className="testButton"><i className="fa fa-bolt" /></button>
       </div>
     </div>
   );
 };
 
-Timer.propTypes = {
-  
-};
 
 export default Timer;
