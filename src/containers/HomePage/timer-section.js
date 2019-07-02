@@ -44,7 +44,7 @@ const Timer = () => {
         <p>TIME OVER</p>
       )}
       {currentState !== 'ended' && (
-        <p>{moment.utc(duration).format('HH:mm:ss')}</p>
+        <p>{moment.utc(duration).format('mm:ss')}</p>
       )}
       <div className="button__section">
         {(currentState === 'stopped' || currentState === 'paused' || currentState === 'ended') && (
@@ -56,7 +56,7 @@ const Timer = () => {
         {(currentState === 'paused'|| currentState === 'playing') && (
           <button type="button" onClick={stop}><i className="fa fa-stop" /></button>
         )}
-        <button className="testButton">Run Tests</button>
+        <button className="testButton"><i className="fa fa-bolt" /></button>
       </div>
     </div>
   );
