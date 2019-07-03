@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import HomePage from "./containers/HomePage/HomePage.js";
 
-const Index = () => {
+const App = () => {
 	return <HomePage />;
 };
 
-ReactDOM.render(<Index />, document.getElementById("index"));
-export default Index;
+ReactDOM.render(<App />, document.getElementById("app"));
+export default App;

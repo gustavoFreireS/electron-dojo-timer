@@ -4,10 +4,10 @@ import '../../stylesheets/styles.scss';
 
 const HomePage = () => {
 	return (
-		<div className="app-container">
+		<Fragment>
 			<div className='dragBar'></div>
 			<Timer />
-		</div>
+		</Fragment>
 	)
 }
 export default HomePage;
