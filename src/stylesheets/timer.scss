@@ -1,46 +1,56 @@
+$timer-padding: 10px;
+$bar-heigth: 36px;
+
 .timer {
   &__container {
-    // margin-top: 100px;
     color: #fff;
-    height: 100vh;
+    height: calc(100vh - (2 * #{$timer-padding}) - #{$bar-heigth});
     background: #4daf7c;
-    padding: 10px;
-    padding-top: 30px;
-    p {
-      margin: 0;
-      text-align: center;
-      font-weight: bold;
-      font-size: 40px;
-    }
-    .button__section {
-      display: flex;
-      position: absolute;
-      width: 90%;
-      bottom: 10px;
-      button{
-        border: 0;
-        margin: 3px;
-        padding: 5px 10px;
-        border-radius: 3px;
-        font-size: 16px;
-        border-bottom: 2px solid #e3e3e3;
-        min-width: 35px;
-        text-align: center;
-        background-color: #FFFFFF;
-        cursor: pointer;
-        outline: none;
-        
-        &:hover {
-          background-color: darken(#FFFFFF, 8%);
-        }
-        &:active {
-          background-color: darken(#FFFFFF, 20%);
-        }
-      }
+    padding: $timer-padding;
+    padding-top: calc(#{$bar-heigth} + #{$timer-padding});
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-      .testButton{
-        margin-left: auto;
-      }
+  &__stopwatch {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__actions {
+    display: flex;
+  }
+
+  &__button {
+    border: 0;
+    margin: 3px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 16px;
+    border-bottom: 2px solid #e3e3e3;
+    min-width: 35px;
+    text-align: center;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    outline: none;
+    
+    &:hover {
+      background-color: darken(#FFFFFF, 8%);
+    }
+
+    &:active {
+      background-color: darken(#FFFFFF, 20%);
+    }
+
+    &--test {
+      margin-left: auto;
     }
   }
 }
