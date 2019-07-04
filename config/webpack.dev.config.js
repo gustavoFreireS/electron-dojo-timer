@@ -1,5 +1,12 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
+	"externals": {
+		"electron": "require('electron')",
+		"child_process": "require('child_process')",
+		"fs": "require('fs')",
+		"path": "require('path')",
+		"readline": "require('readline')"
+ },
 	module: {
 		rules: [
 			{
@@ -10,7 +17,7 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.scss$/,
+				test: /\.(scss|css)$/,
 				use: ["style-loader", "css-loader", "sass-loader"]
 			},
 			{
