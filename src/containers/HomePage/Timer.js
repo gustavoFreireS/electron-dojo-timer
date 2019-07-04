@@ -2,47 +2,51 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import '../../stylesheets/timer.scss';
 
+
 const Timer = () => {
+  const ONE_SECOND = 1000;
+  const THRESHOLD = 5 * 60 * ONE_SECOND;
+
   const [currentState, setCurrentState] = useState('stopped');
-  const [duration, setDuration] = useState(0);
+  const [counter, setCounter] = useState(THRESHOLD);
 
   const play = () => {
-    setCurrentState('playing')
+    setCurrentState('playing');
   }
 
   const stop = () => {
-    setDuration(0)
-    setCurrentState('stopped')
+    setCounter(THRESHOLD);
+    setCurrentState('stopped');
   }
 
   const pause = () => {
-    setCurrentState('paused')
+    setCurrentState('paused');
   }
 
   useEffect(() => {
-    var timerID = setInterval( () => tick(), 1000 );
-   
+    var timerID = setInterval(() => tick(), ONE_SECOND);
+
     return function cleanup() {
       clearInterval(timerID);
     };
   });
 
   function tick() {
-    if (currentState === 'playing') { 
-      setDuration(duration + 1000)
+    if (currentState === 'playing') {
+      setCounter(counter - ONE_SECOND);
     }
   }
 
-  if (currentState === 'playing' && duration >= 5 * 60 * 1000) {
-    setCurrentState('ended')
-    setDuration(0)
+  if (currentState === 'playing' && counter === 0) {
+    setCurrentState('ended');
+    setCounter(THRESHOLD);
   }
 
   return (
     <div className="timer__container">
       <div className="timer__stopwatch">
         {currentState === 'ended' && 'TIMEOVER'}
-        {currentState !== 'ended' && moment.utc(duration).format('mm:ss')}
+        {currentState !== 'ended' && moment.utc(counter).format('mm:ss')}
       </div>
       <div className="timer__actions">
         {(currentState === 'stopped' || currentState === 'paused' || currentState === 'ended') && (
