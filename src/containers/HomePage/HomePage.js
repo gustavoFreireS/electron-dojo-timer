@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import Timer from './timer-section';
+import Timer from './Timer';
 import '../../stylesheets/styles.scss';
 
 const HomePage = () => {
