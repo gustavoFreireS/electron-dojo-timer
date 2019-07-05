@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import HomePage from "./containers/HomePage/HomePage.js";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import HomePage from './containers/HomePage/HomePage';
 
 const App = () => {
-	return <HomePage />;
+  return <HomePage />;
 };
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById('app'));
 export default App;
