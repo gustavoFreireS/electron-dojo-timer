@@ -1,6 +1,7 @@
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+
+const { app } = electron;
+const { BrowserWindow } = electron;
 
 const path = require('path');
 const url = require('url');
@@ -10,17 +11,19 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 300, 
-    height: 130, 
+    width: 300,
+    height: 130,
     show: false,
     titleBarStyle: 'hiddenInset',
     alwaysOnTop: true,
   });
-  mainWindow.loadURL(isDev ? 'http://localhost:8080' : `file://${path.join(__dirname, '../dist/index.html')}`);
+  mainWindow.loadURL(
+    isDev ? 'http://localhost:8080' : `file://${path.join(__dirname, '../dist/index.html')}`,
+  );
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.show();
   });
-  mainWindow.on('closed', () => mainWindow = null);
+  mainWindow.on('closed', () => (mainWindow = null));
 }
 
 app.on('ready', createWindow);

@@ -3,25 +3,25 @@ $bar-heigth: 36px;
 
 .timer {
   &__container {
-    color: #fff;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     height: calc(100vh - (2 * #{$timer-padding}) - #{$bar-heigth});
-    background: #4daf7c;
     padding: $timer-padding;
     padding-top: calc(#{$bar-heigth} + #{$timer-padding});
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    color: #FFFFFF;
+    background: #4DAF7C;
   }
 
   &__stopwatch {
+    display: flex;
     flex: 1;
+    align-items: center;
+    justify-content: center;
     margin: 0;
-    text-align: center;
     font-weight: bold;
     font-size: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
   }
 
   &__actions {
@@ -29,18 +29,18 @@ $bar-heigth: 36px;
   }
 
   &__button {
-    border: 0;
+    min-width: 35px;
     margin: 3px;
     padding: 5px 10px;
-    border-radius: 3px;
     font-size: 16px;
-    border-bottom: 2px solid #e3e3e3;
-    min-width: 35px;
     text-align: center;
     background-color: #FFFFFF;
-    cursor: pointer;
+    border: 0;
+    border-bottom: 2px solid #E3E3E3;
+    border-radius: 3px;
     outline: none;
-    
+    cursor: pointer;
+
     &:hover {
       background-color: darken(#FFFFFF, 8%);
     }
