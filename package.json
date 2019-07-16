@@ -1,7 +1,7 @@
 {
-  "name": "react-boilerplate-project",
+  "name": "dojo-timer",
   "version": "1.0.0",
-  "description": "Just an updated version of my regular React boilerplate",
+  "description": "dojo timer for the win",
   "main": "electron/electron.js",
   "license": "MIT",
   "extends": null,
@@ -31,8 +31,9 @@
     "babel-preset-react": "^6.24.1",
     "concurrently": "^4.0.1",
     "css-loader": "^1.0.0",
-    "electron": "^3.0.6",
-    "electron-builder": "^20.28.4",
+    "electron": "^5.0.6",
+    "electron-builder": "^20.44.4",
+    "electron-rebuild": "^1.8.5",
     "eslint": "^4.19.1",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.50.0",
@@ -57,10 +58,16 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "child_process": "^1.0.2",
     "electron-is-dev": "^1.0.1",
+    "fs": "0.0.1-security",
     "moment": "^2.24.0",
+    "net": "^1.0.2",
+    "node-pty": "^0.8.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "webpack-node-externals": "^1.7.2",
+    "xterm": "^3.14.5",
+    "xterm-addon-fit": "^0.1.0"
   }
 }

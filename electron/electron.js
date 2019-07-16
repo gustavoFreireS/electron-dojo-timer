@@ -6,12 +6,77 @@ const url = require('url');
 const isDev = require('electron-is-dev');
 
 let mainWindow;
+const createMenu = () => {
+  const application = {
+    label: 'Application',
+    submenu: [
+      {
+        label: 'About Application',
+        role: 'about',
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        click: () => {
+          electron.app.quit();
+        },
+      },
+    ],
+  };
 
+  const edit = {
+    label: 'Edit',
+    submenu: [
+      {
+        label: 'Undo',
+        accelerator: 'CmdOrCtrl+Z',
+        role: 'undo',
+      },
+      {
+        label: 'Redo',
+        accelerator: 'Shift+CmdOrCtrl+Z',
+        role: 'redo',
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: 'Cut',
+        accelerator: 'CmdOrCtrl+X',
+        role: 'cut',
+      },
+      {
+        label: 'Copy',
+        accelerator: 'CmdOrCtrl+C',
+        role: 'copy',
+      },
+      {
+        label: 'Paste',
+        accelerator: 'CmdOrCtrl+V',
+        role: 'paste',
+      },
+      {
+        label: 'Select All',
+        accelerator: 'CmdOrCtrl+A',
+        role: 'selectAll',
+      },
+    ],
+  };
+
+  const template = [application, edit];
+
+  electron.Menu.setApplicationMenu(electron.Menu.buildFromTemplate(template));
+};
+global.sharedObject = {testPath: '', testCommand: ''};
 function createWindow() {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
       nativeWindowOpen: true,
+      webSecurity: false
     },
     width: 300,
     height: 130,
@@ -28,6 +93,11 @@ function createWindow() {
         width: 800,
         titleBarStyle: 'native',
         height: 300,
+        webPreferences: {
+          nodeIntegration: true,
+          nativeWindowOpen: true,
+          webSecurity: false
+        },
       })
       event.newGuest = new BrowserWindow(options)
     }
@@ -39,7 +109,9 @@ function createWindow() {
   mainWindow.on('closed', () => mainWindow = null);
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

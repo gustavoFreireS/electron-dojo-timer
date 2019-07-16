@@ -1,12 +1,8 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
-	"externals": {
-		"electron": "require('electron')",
-		"child_process": "require('child_process')",
-		"fs": "require('fs')",
-		"path": "require('path')",
-		"readline": "require('readline')"
- },
+	externals: [
+		require('webpack-node-externals')()
+	],
 	module: {
 		rules: [
 			{

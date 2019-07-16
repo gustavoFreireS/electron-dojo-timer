@@ -11,6 +11,10 @@
 
 <body>
   <div id="app"></div>
+  <script crossorigin="anonymous">
+    var electron = require('electron');
+    const sharedObj = electron.remote.getGlobal('sharedObject');
+  </script>
 </body>
 
 </html>
