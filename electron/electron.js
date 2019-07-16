@@ -1,6 +1,6 @@
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const { app } = electron;
+const { BrowserWindow } = electron;
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
@@ -106,7 +106,7 @@ function createWindow() {
   mainWindow.webContents.on('did-finish-load', function () {
     mainWindow.show();
   });
-  mainWindow.on('closed', () => mainWindow = null);
+  mainWindow.on('closed', () => (mainWindow = null));
 }
 
 app.on('ready', () => {

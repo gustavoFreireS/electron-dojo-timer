@@ -1,4 +1,5 @@
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
 	externals: [
 		require('webpack-node-externals')()
