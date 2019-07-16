@@ -10,7 +10,7 @@ _This project use yarn_
 2. `yarn`
 3. `yarn run dev`
 
-## Contribuitors
+## Contributors
 
 - [Gustavo Freire](https://github.com/gustavoFreireS)
 - [Tyrone Damasceno](https://github.com/tyronedamasceno)
