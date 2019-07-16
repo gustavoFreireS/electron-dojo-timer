@@ -101,7 +101,7 @@ const Timer = () => {
         Math.max(size ? size.rows : term.rows, 1)
       );
     });
-    // ptyProc.write(`cd '${remoteObj.testPath}' && ${remoteObj.testCommand} \r`);
+    ptyProc.write(`cd '${remoteObj.testPath}' && ${remoteObj.testCommand} \r`);
     exec(`cd '${remoteObj.testPath}' && ${remoteObj.testCommand}`, (error, stdout, stderr) => {
       console.log('stdout', stdout);
       console.log('error', error);
