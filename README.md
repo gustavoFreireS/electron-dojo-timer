@@ -13,8 +13,9 @@ _This project use yarn_
 ## Contribuitors
 
 - [Gustavo Freire](https://github.com/gustavoFreireS)
-- [Tyrone Macedo Damasceno](https://github.com/tyronedamasceno)
+- [Tyrone Damasceno](https://github.com/tyronedamasceno)
 - [David Costa](https://github.com/davidcostadev)
+- [Julio Marins](https://github.com/aj07mm)
 
 ## License
 
