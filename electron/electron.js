@@ -1,4 +1,5 @@
 const electron = require('electron');
+
 const { app } = electron;
 const { BrowserWindow } = electron;
 const path = require('path');
@@ -70,43 +71,50 @@ const createMenu = () => {
 
   electron.Menu.setApplicationMenu(electron.Menu.buildFromTemplate(template));
 };
-global.sharedObject = {testPath: '', testCommand: ''};
+global.sharedObject = { testPath: '', testCommand: '' };
 function createWindow() {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
       nativeWindowOpen: true,
-      webSecurity: false
+      webSecurity: false,
     },
     width: 300,
-    height: 130,
+    height: 150,
     show: false,
     titleBarStyle: 'hiddenInset',
     alwaysOnTop: true,
   });
-  mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
-    if (frameName === 'modal') {
-      // open window as modal
-      event.preventDefault()
-      Object.assign(options, {
-        parent: mainWindow,
-        width: 800,
-        titleBarStyle: 'native',
-        height: 300,
-        webPreferences: {
-          nodeIntegration: true,
-          nativeWindowOpen: true,
-          webSecurity: false
-        },
-      })
-      event.newGuest = new BrowserWindow(options)
-    }
-  });
-  mainWindow.loadURL(isDev ? 'http://localhost:8080' : `file://${path.join(__dirname, '../dist/index.html')}`);
-  mainWindow.webContents.on('did-finish-load', function () {
+  mainWindow.webContents.on(
+    'new-window',
+    (event, url, frameName, disposition, options, additionalFeatures) => {
+      if (frameName === 'modal') {
+        // open window as modal
+        event.preventDefault();
+        Object.assign(options, {
+          parent: mainWindow,
+          width: 800,
+          titleBarStyle: 'native',
+          height: 300,
+          webPreferences: {
+            nodeIntegration: true,
+            nativeWindowOpen: true,
+            webSecurity: false,
+          },
+        });
+        event.newGuest = new BrowserWindow(options);
+      }
+    },
+  );
+  mainWindow.loadURL(
+    isDev ? 'http://localhost:8080' : `file://${path.join(__dirname, '../dist/index.html')}`,
+  );
+  mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
   });
-  mainWindow.on('closed', () => (mainWindow = null));
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 }
 
 app.on('ready', () => {

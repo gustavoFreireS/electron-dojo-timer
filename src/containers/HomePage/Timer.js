@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 import moment from 'moment';
 import '../../stylesheets/timer.scss';
-import TestConfig from './TestConfig';
 import * as fit from 'xterm/lib/addons/fit/fit';
 import * as pty from 'node-pty';
 import * as os from 'os';
 import { Terminal } from 'xterm';
+import { exec } from 'child_process';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { remote } from 'electron';
+import TestConfig from './TestConfig';
 
 const Timer = () => {
   const ONE_SECOND = 1000;
@@ -48,21 +51,19 @@ const Timer = () => {
     setCounter(THRESHOLD);
   }
   const config = () => {
-    let modal = window.open('', 'modal');
+    const modal = window.open('', 'modal');
     modal.document.write('<div id="modal"/>');
-    ReactDOM.render(<TestConfig />, modal.document.getElementById("modal"));
-  }
+    ReactDOM.render(<TestConfig />, modal.document.getElementById('modal'));
+  };
   const test = () => {
-    const exec = require('child_process').exec;
-    const remote = require('electron').remote;
     const remoteObj = remote.getGlobal('sharedObject');
     Terminal.applyAddon(fit);
     const term = new Terminal({
       fontFamily: 'Fira Code, Iosevka, monospace',
       fontSize: 12,
-      experimentalCharAtlas: 'dynamic'
+      experimentalCharAtlas: 'dynamic',
     });
-    let terminal = window.open('', 'modal');
+    const terminal = window.open('', 'modal');
     terminal.document.write(
       `
         <link rel="stylesheet" href="node_modules/xterm/lib/xterm.css" />
@@ -80,15 +81,19 @@ const Timer = () => {
       
         </style>
         <div id="term"></div>
-      `
+      `,
     );
     const terminalElem = terminal.document.getElementById('term');
     term.open(terminalElem);
-    const ptyProc = pty.spawn(os.platform() === 'win32' ? 'powershell.exe' : process.env.SHELL || '/bin/bash', [], {
-      cols: term.cols,
-      rows: term.rows
-    });
-    term.on('data', (data) => {
+    const ptyProc = pty.spawn(
+      os.platform() === 'win32' ? 'powershell.exe' : process.env.SHELL || '/bin/bash',
+      [],
+      {
+        cols: term.cols,
+        rows: term.rows,
+      },
+    );
+    term.on('data', data => {
       ptyProc.write(data);
     });
     ptyProc.on('data', data => {
@@ -97,25 +102,18 @@ const Timer = () => {
     term.on('resize', size => {
       ptyProc.resize(
         Math.max(size ? size.cols : term.cols, 1),
-        Math.max(size ? size.rows : term.rows, 1)
+        Math.max(size ? size.rows : term.rows, 1),
       );
     });
     ptyProc.write(`cd '${remoteObj.testPath}' && ${remoteObj.testCommand} \r`);
-    exec(`cd '${remoteObj.testPath}' && ${remoteObj.testCommand}`, (error, stdout, stderr) => {
-      console.log('stdout', stdout);
-      console.log('error', error);
-      console.log('stderr', stderr);
-
+    exec(`cd '${remoteObj.testPath}' && ${remoteObj.testCommand}`, error => {
       if (!error) {
         setColor('#4daf7c');
-      }
-      else {
+      } else {
         setColor('red');
       }
-
     });
-    console.log(remoteObj.testPath);
-  }
+  };
 
   return (
     <div className="timer__container" style={{ background: color }}>
@@ -135,10 +133,16 @@ const Timer = () => {
           </button>
         )}
         {(currentState === 'paused' || currentState === 'playing') && (
-          <button type="button" className="timer__button timer__button--stop" onClick={stop}><i className="fa fa-stop" /></button>
+          <button type="button" className="timer__button timer__button--stop" onClick={stop}>
+            <i className="fa fa-stop" />
+          </button>
         )}
-        <button className="timer__button timer__button--test" onClick={test}><i className="fa fa-bolt" /></button>
-        <button className="timer__button timer__button--test" onClick={config}><i className="fa fa-cog" /></button>
+        <button type="button" className="timer__button timer__button--test" onClick={test}>
+          <i className="fa fa-bolt" />
+        </button>
+        <button type="button" className="timer__button timer__button--test" onClick={config}>
+          <i className="fa fa-cog" />
+        </button>
       </div>
     </div>
   );
