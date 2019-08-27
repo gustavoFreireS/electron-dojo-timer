@@ -119,7 +119,6 @@ function createWindow() {
 
 app.on('ready', () => {
   createWindow();
-  createMenu();
 });
 
 app.on('window-all-closed', () => {
