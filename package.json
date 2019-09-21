@@ -16,6 +16,9 @@
       "output": "electron-build"
     }
   },
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:8080 && electron .\"",
     "start": "webpack-dev-server --mode development --config config/webpack.dev.config.js --hot",
@@ -76,6 +79,7 @@
     "fs": "0.0.1-security",
     "moment": "^2.24.0",
     "net": "^1.0.2",
+    "node-pty": "^0.8.1",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "react": "^16.8.6",
