@@ -7,9 +7,6 @@ const url = require('url');
 const isDev = require('electron-is-dev');
 var os = require('os');
 
-app.commandLine.hasSwitch('disable-gpu');
-app.commandLine.hasSwitch('enable-transparent-visuals')
-
 console.log(os.hostname);
 
 let mainWindow;
@@ -40,6 +37,7 @@ function createWindow() {
           titleBarStyle: 'native',
           height: 300,
           frame: true,
+          transparent: false,
           webPreferences: {
             nodeIntegration: true,
             nativeWindowOpen: true,
