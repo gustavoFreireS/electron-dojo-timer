@@ -1,15 +1,54 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
-body {
+body, html {
   margin: 0;
   font-family: Lato;
+  border-radius: 3px;
 }
-
+#app {
+  background-color: transparent;
+}
 .dragBar {
   position: absolute;
-  width: 100%;
+  width: 88%;
   height: 36px;
   background: transparent;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
   -webkit-app-region: drag;
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 113.5%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    top: 36px;
+    right: -13.5%;
+    z-index: 9999;
+  }
+}
+
+.close {
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  top: 25%;
+  content: ' ';
+  height: 15px;
+  width: 2px;
+  background-color: #fff;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }

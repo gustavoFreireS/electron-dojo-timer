@@ -11,21 +11,30 @@
     "start": "webpack-dev-server --mode development --config config/webpack.dev.config.js --hot",
     "build": "webpack --mode production --config config/webpack.prod.config.js --env.NODE_ENV=production --progress",
     "electron-pack": "electron-builder",
-    "rebuild": "electron-rebuild",
-    "preelectron-pack": "yarn rebuild && yarn build ",
+    "postinstall": "electron-rebuild",
+    "preelectron-pack": "yarn postinstall && yarn build ",
     "lint": "yarn lint:js && yarn lint:scss",
     "lint:js": "eslint src/**/*.js",
-    "lint:scss": "npx stylelint src/**/*.scss"
+    "lint:scss": "npx stylelint src/**/*.scss",
+    "postelectron-pack": "electron-builder install-app-deps"
   },
   "build": {
+    "linux": {
+      "target": "deb",
+      "maintainer": "Gustavo Freire",
+      "category": "Development",
+      "icon" : "icons/icon.png"
+    },
     "appId": "com.example.electron-cra",
     "files": [
       "electron/electron.js",
       "dist/main.js",
       "dist/style.css",
-      "dist/index.html"
+      "dist/index.html",
+      "timer.png"
     ],
     "directories": {
+      "buildResources": "resources",
       "output": "electron-build"
     }
   },
@@ -38,6 +47,7 @@
     "css-loader": "^3.4.2",
     "electron": "^8.0.0",
     "electron-builder": "^22.3.2",
+    "electron-installer-snap": "^5.0.0",
     "electron-rebuild": "^1.10.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",

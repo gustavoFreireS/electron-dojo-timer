@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { remote } from 'electron';
 
 import '../../stylesheets/timer.scss';
+const dialog = remote.dialog;
 
 const TestConfig = () => {
   const [config, setConfig] = useState({});
@@ -17,10 +18,23 @@ const TestConfig = () => {
     remoteObj.testCommand = config.command;
     remoteObj.testPath = config.path;
   };
+
+  const onPathChoose = () => {
+    const newConfig = config;
+    dialog.showOpenDialog({
+      properties: ['openDirectory']
+    }).then((value) => {
+      console.log(value);
+      newConfig.path = value.filePaths[0];
+      console.log(newConfig.path);
+      setConfig({...newConfig});
+    });
+  }
   const change = e => {
     const newConfig = config;
     newConfig[e.target.id] = e.target.value;
     setConfig(newConfig);
+    console.log(config);
   };
   const style = {
     button: {
@@ -32,7 +46,9 @@ const TestConfig = () => {
   return (
     <div className="config">
       <p>Digite o path do teste</p>
-      <input key="path" defaultValue={config.path} id="path" onChange={change} />
+      <p>{config.path}</p>
+      <button onClick={() => onPathChoose()}>Selecione a pasta do projeto</button>
+      {/* <input key="path" defaultValue={config.path} id="path" onChange={change} /> */}
       <p>Digite o comando de teste</p>
       <input key="command" defaultValue={config.command} id="command" onChange={change} />
       <button type="button" style={style.button} onClick={save}>
