@@ -8,8 +8,7 @@ _This project use yarn_
 
 1. clone
 2. `yarn`
-3. `yarn rebuild` (install all node dependencies)
-4. `yarn run dev`
+3. `yarn run dev`
 
 ## Contribuitors
 
