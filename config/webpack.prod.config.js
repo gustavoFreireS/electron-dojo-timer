@@ -5,6 +5,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+  externals: [require('webpack-node-externals')()],
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
@@ -35,7 +36,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(eot|ttf|woff|otf)$/,
+        test: /\.(eot|ttf|woff|otf|node)$/,
         loader: 'file-loader',
       },
       {
